@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
+</head>
+<body>
+
+<div class="container h-100">
+
+<h1 class="name-project">{{ name_project }}</h1>
+
+{% for value in flat %}
+
+    {% if value['type'] == 'section' %}
+        <h3 class="section-name">{{ value['number'] }} {{ value['name'] }}</h3>
+    {% endif %}
+
+    {% if value['type'] == 'work_item' %}
+        <div class="case">
+
+            <div class="row">
+                <h5 class="font-weight-bold case-id">{{ value['work_item']['globalId'] }}</h5>
+                <h5 class="font-weight-bold case-name">{{ value['work_item']['name'] }}</h5>
+                <div class="col right">
+                    <div class="row font-weight version">ver: {{ value['work_item']['versionNumber'] }}</div>
+                    <div class="row font-weight priority">priority: {{ value['work_item']['priority'] }}</div>
+                </div>
+            </div>
+
+        {% if value['work_item']['preconditionSteps'] %}
+            <h5>Precondition</h5>
+            <table class="table-responsive">
+                <thead>
+                <tr>
+                    <th scope="col" class="col1 col-num-head align-top">#</th>
+                    <th scope="col" class="col2 col-action align-top">Action</th>
+                    <th scope="col" class="col3 col-expected align-top">Expected</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for num, step in enumerate(value['work_item']['preconditionSteps']) %}
+                <tr>
+                    <th scope="row" class="col1 col-num-body">{{ num+1 }}</th>
+                    <td class="col2 col-action">{{ step['action']|safe }}</td>
+                    <td class="col3 col-expected">{{ step['expected']|safe }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        {% if value['work_item']['steps'] %}
+            <h5>Steps</h5>
+            <table class="table-responsive">
+                <thead>
+                <tr>
+                    <th scope="col" class="col1 col-num-head align-top">#</th>
+                    <th scope="col" class="col2 col-action align-top">Action</th>
+                    <th scope="col" class="col3 col-expected align-top">Expected</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for num, step in enumerate(value['work_item']['steps']) %}
+                <tr>
+                    <th scope="row" class="col1 col-num-body">{{ num+1 }}</th>
+                    <td class="col2 col-action">{{ step['action']|safe }}</td>
+                    <td class="col3 col-expected">{{ step['expected']|safe }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        {% if value['work_item']['postconditionSteps'] %}
+            <h5>PostCondition</h5>
+            <table class="table-responsive">
+                <thead>
+                <tr>
+                    <th scope="col" class="col1 col-num-head align-top">#</th>
+                    <th scope="col" class="col2 col-action align-top">Action</th>
+                    <th scope="col" class="col3 col-expected align-top">Expected</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for num, step in enumerate(value['work_item']['postconditionSteps']) %}
+                <tr>
+                    <th scope="row" class="col1 col-num-body">{{ num+1 }}</th>
+                    <td class="col2 col-action">{{ step['action']|safe }}</td>
+                    <td class="col3 col-expected">{{ step['expected']|safe }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+            </div>
+    {% endif %}
+
+{% endfor %}
+</div>
+
+</body>
+</html>

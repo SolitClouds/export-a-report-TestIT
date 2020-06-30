@@ -1,0 +1,70 @@
+html, body, .card {
+    height: 100%;
+}
+
+.name-project {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.content {
+    width: 1000px;
+}
+
+.priority {
+}
+
+.col-num {
+    width: 20px;
+}
+
+.case {
+    margin-bottom: 40px;
+}
+
+.case-id {
+    text-align: center;
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    margin: 3px;
+    padding: 5px;
+}
+
+.case-name {
+    text-align: center;
+    margin: 5px;
+}
+
+.version, .priority {
+    display: block;
+    text-align: right;
+    font-size: 0.8em;
+}
+
+th {
+}
+
+.col-num-body, td.col-action, td.col-expected {
+    border-bottom: 1px solid #6a6a6a;
+}
+
+.col-num-head, th.col-action, th.col-expected {
+    border-bottom: 3px solid #6a6a6a;
+}
+
+.table-responsive {
+    display: table;
+}
+
+tbody {
+    vertical-align: top;
+}
+
+.col1 {
+    width: 4%;
+}
+
+.col2, .col3 {
+    width: 48%;
+}

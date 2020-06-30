@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    container_name: test_it_report
+    build: .
+    ports:
+      - 5678:8000
+    environment:
+      TOKEN: '${TOKEN}'
+      URL: '${URL}'

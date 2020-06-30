@@ -1,0 +1,7 @@
+.pytest_cache
+static/attachments/*
+!static/attachments/README
+*.swp
+.env
+/.gitignore
+.idea
