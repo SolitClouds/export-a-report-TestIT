@@ -4,16 +4,8 @@ services:
   web:
     container_name: test_it_report
     build: .
-    labels:
-      - "traefik.http.routers.tms-report.rule=Host(`tms-report.autotest.solit-clouds.local`)"
-      - "traefik.http.services.tms-report.loadbalancer.server.port=8000"
-    expose:
-      - 8000
+    ports:
+      - 5678:8000
     environment:
       TOKEN: '${TOKEN}'
       URL: '${URL}'
-
-networks:
-  default:
-    external:
-      name: services
